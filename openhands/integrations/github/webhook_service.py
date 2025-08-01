@@ -21,6 +21,7 @@ class GitHubWebhookService:
         pr_base_branch: str,
         action: str,
         sender: dict[str, Any],
+        user_id: Optional[str] = None,
     ) -> dict[str, Any]:
         """
         Process a GitHub pull request event.
@@ -34,6 +35,7 @@ class GitHubWebhookService:
             pr_base_branch: Target branch
             action: The action that triggered the event (opened, synchronize, reopened)
             sender: Information about the user who triggered the event
+            user_id: Optional user ID for multi-user support
 
         Returns:
             Dict with processing status and details
@@ -45,6 +47,7 @@ class GitHubWebhookService:
                 'pr_number': pr_number,
                 'action': action,
                 'sender': sender.get('login'),
+                'user_id': user_id,
             },
         )
 
