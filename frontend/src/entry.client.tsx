@@ -5,7 +5,7 @@
  * For more information, see https://remix.run/file-conventions/entry.client
  */
 
-import { HydratedRouter } from "react-router/dom";
+import { RouterProvider } from "react-router-dom";
 import React, { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { Provider } from "react-redux";
@@ -16,6 +16,7 @@ import store from "./store";
 import OpenHands from "./api/open-hands";
 import { displayErrorToast } from "./utils/custom-toast-handlers";
 import { queryClient } from "./query-client-config";
+import { router } from "./router";
 
 function PosthogInit() {
   const [posthogClientKey, setPosthogClientKey] = React.useState<string | null>(
@@ -65,7 +66,7 @@ prepareApp().then(() =>
       <StrictMode>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <HydratedRouter />
+            <RouterProvider router={router} />
             <PosthogInit />
             <div id="modal-portal-exit" />
           </QueryClientProvider>

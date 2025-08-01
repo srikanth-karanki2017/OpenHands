@@ -1,4 +1,234 @@
 {
+    "AUTH$LOGIN_TO_OPENHANDS": {
+        "en": "Login to OpenHands"
+    },
+    "AUTH$ENTER_YOUR_CREDENTIALS": {
+        "en": "Enter your credentials to continue"
+    },
+    "AUTH$USERNAME": {
+        "en": "Username"
+    },
+    "AUTH$USERNAME_PLACEHOLDER": {
+        "en": "Enter your username"
+    },
+    "AUTH$PASSWORD": {
+        "en": "Password"
+    },
+    "AUTH$PASSWORD_PLACEHOLDER": {
+        "en": "Enter your password"
+    },
+    "AUTH$LOGIN": {
+        "en": "Login"
+    },
+    "AUTH$DONT_HAVE_ACCOUNT": {
+        "en": "Don't have an account?"
+    },
+    "AUTH$REGISTER": {
+        "en": "Register"
+    },
+    "AUTH$CREATE_ACCOUNT": {
+        "en": "Create Account"
+    },
+    "AUTH$ENTER_DETAILS_TO_REGISTER": {
+        "en": "Enter your details to create an account"
+    },
+    "AUTH$EMAIL": {
+        "en": "Email"
+    },
+    "AUTH$EMAIL_PLACEHOLDER": {
+        "en": "Enter your email"
+    },
+    "AUTH$CONFIRM_PASSWORD": {
+        "en": "Confirm Password"
+    },
+    "AUTH$CONFIRM_PASSWORD_PLACEHOLDER": {
+        "en": "Confirm your password"
+    },
+    "AUTH$ALREADY_HAVE_ACCOUNT": {
+        "en": "Already have an account?"
+    },
+    "AUTH$LOGIN_FAILED": {
+        "en": "Login failed. Please check your credentials and try again."
+    },
+    "AUTH$REGISTRATION_FAILED": {
+        "en": "Registration failed. Please try again."
+    },
+    "AUTH$MY_PROFILE": {
+        "en": "My Profile"
+    },
+    "AUTH$VIEW_AND_MANAGE_YOUR_PROFILE": {
+        "en": "View and manage your profile settings"
+    },
+    "AUTH$PROFILE_INFORMATION": {
+        "en": "Profile Information"
+    },
+    "AUTH$VIEW_YOUR_ACCOUNT_DETAILS": {
+        "en": "View your account details"
+    },
+    "AUTH$ACCOUNT_CREATED": {
+        "en": "Account Created"
+    },
+    "AUTH$LAST_LOGIN": {
+        "en": "Last Login"
+    },
+    "AUTH$EMAIL_NOT_VERIFIED": {
+        "en": "Email not verified"
+    },
+    "AUTH$LOGOUT": {
+        "en": "Logout"
+    },
+    "AUTH$ACCOUNT_SETTINGS": {
+        "en": "Account Settings"
+    },
+    "AUTH$MANAGE_YOUR_ACCOUNT_SETTINGS": {
+        "en": "Manage your account settings"
+    },
+
+    "WEBHOOK$WEBHOOK_MANAGEMENT": {
+        "en": "Webhook Management"
+    },
+    "WEBHOOK$MANAGE_YOUR_WEBHOOKS": {
+        "en": "Manage your webhook configurations and view logs"
+    },
+    "WEBHOOK$MY_WEBHOOKS": {
+        "en": "My Webhooks"
+    },
+    "WEBHOOK$WEBHOOK_LOGS": {
+        "en": "Webhook Logs"
+    },
+    "WEBHOOK$MANAGE_YOUR_WEBHOOK_CONFIGURATIONS": {
+        "en": "Manage your webhook configurations"
+    },
+    "WEBHOOK$ADD_WEBHOOK": {
+        "en": "Add Webhook"
+    },
+    "WEBHOOK$EDIT_WEBHOOK": {
+        "en": "Edit Webhook"
+    },
+    "WEBHOOK$DELETE_WEBHOOK": {
+        "en": "Delete Webhook"
+    },
+    "WEBHOOK$DELETE_WEBHOOK_CONFIRMATION": {
+        "en": "Are you sure you want to delete the webhook '{{name}}'? This action cannot be undone."
+    },
+    "WEBHOOK$NAME": {
+        "en": "Name"
+    },
+    "WEBHOOK$URL": {
+        "en": "URL"
+    },
+    "WEBHOOK$REPOSITORY": {
+        "en": "Repository"
+    },
+    "WEBHOOK$EVENTS": {
+        "en": "Events"
+    },
+    "WEBHOOK$STATUS": {
+        "en": "Status"
+    },
+    "WEBHOOK$CREATED_AT": {
+        "en": "Created At"
+    },
+    "WEBHOOK$ACTIVE": {
+        "en": "Active"
+    },
+    "WEBHOOK$INACTIVE": {
+        "en": "Inactive"
+    },
+    "WEBHOOK$NO_WEBHOOKS_FOUND": {
+        "en": "No webhooks found. Click 'Add Webhook' to create one."
+    },
+    "WEBHOOK$NAME_PLACEHOLDER": {
+        "en": "Enter webhook name"
+    },
+    "WEBHOOK$NAME_DESCRIPTION": {
+        "en": "A descriptive name for your webhook"
+    },
+    "WEBHOOK$URL_DESCRIPTION": {
+        "en": "The URL that will receive webhook events"
+    },
+    "WEBHOOK$EVENTS_DESCRIPTION": {
+        "en": "Select the events that will trigger this webhook"
+    },
+    "WEBHOOK$REPOSITORY_DESCRIPTION": {
+        "en": "Optional: Limit webhook to a specific repository (format: owner/repo)"
+    },
+    "WEBHOOK$SECRET": {
+        "en": "Secret"
+    },
+    "WEBHOOK$SECRET_PLACEHOLDER_EDIT": {
+        "en": "Leave empty to keep current secret"
+    },
+    "WEBHOOK$SECRET_PLACEHOLDER_NEW": {
+        "en": "Enter a secret for webhook validation"
+    },
+    "WEBHOOK$SECRET_DESCRIPTION": {
+        "en": "A secret key used to validate webhook payloads"
+    },
+    "WEBHOOK$SELECT_STATUS": {
+        "en": "Select status"
+    },
+    "WEBHOOK$STATUS_DESCRIPTION": {
+        "en": "Active webhooks will receive events, inactive webhooks will not"
+    },
+    "WEBHOOK$WEBHOOK_FORM_DESCRIPTION": {
+        "en": "Configure your webhook settings"
+    },
+    "WEBHOOK$ALL_EVENTS": {
+        "en": "All Events"
+    },
+    "WEBHOOK$PULL_REQUEST_EVENTS": {
+        "en": "Pull Request Events"
+    },
+    "WEBHOOK$PUSH_EVENTS": {
+        "en": "Push Events"
+    },
+    "WEBHOOK$ISSUE_EVENTS": {
+        "en": "Issue Events"
+    },
+    "WEBHOOK$COMMENT_EVENTS": {
+        "en": "Comment Events"
+    },
+    "WEBHOOK$ALL_REPOSITORIES": {
+        "en": "All Repositories"
+    },
+    "WEBHOOK$VIEW_WEBHOOK_DELIVERY_HISTORY": {
+        "en": "View webhook delivery history"
+    },
+    "WEBHOOK$FILTER_BY_WEBHOOK": {
+        "en": "Filter by Webhook"
+    },
+    "WEBHOOK$ALL_WEBHOOKS": {
+        "en": "All Webhooks"
+    },
+    "WEBHOOK$EVENT_TYPE": {
+        "en": "Event Type"
+    },
+    "WEBHOOK$PR_NUMBER": {
+        "en": "PR Number"
+    },
+    "WEBHOOK$RESPONSE_CODE": {
+        "en": "Response Code"
+    },
+    "WEBHOOK$TIMESTAMP": {
+        "en": "Timestamp"
+    },
+    "WEBHOOK$NO_LOGS_FOUND": {
+        "en": "No webhook logs found"
+    },
+    "WEBHOOK$NOT_SPECIFIED": {
+        "en": "Not specified"
+    },
+    "WEBHOOK$LOG_DETAILS": {
+        "en": "Webhook Log Details"
+    },
+    "WEBHOOK$LOG_DETAILS_DESCRIPTION": {
+        "en": "Detailed information about this webhook delivery"
+    },
+    "WEBHOOK$ERROR_MESSAGE": {
+        "en": "Error Message"
+    },
+
     "MAINTENANCE$SCHEDULED_MESSAGE": {
         "en": "Scheduled maintenance will begin at {{time}}",
         "ja": "予定されたメンテナンスは{{time}}に開始されます",
@@ -11758,5 +11988,14 @@
         "tr": "Mikro ajan içeriği yüklenirken hata oluştu.",
         "de": "Fehler beim Laden des Microagent-Inhalts.",
         "uk": "Помилка під час завантаження вмісту мікроагента."
+    },
+    "COMMON$CREATE": {
+        "en": "Create"
+    },
+    "COMMON$DELETE": {
+        "en": "Delete"
+    },
+    "COMMON$REFRESH": {
+        "en": "Refresh"
     }
 }
