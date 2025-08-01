@@ -31,6 +31,8 @@ class UserSecrets(BaseModel):
     custom_secrets: CUSTOM_SECRETS_TYPE_WITH_JSON_SCHEMA = Field(
         default_factory=lambda: MappingProxyType({})
     )
+    
+    user_id: str | None = None
 
     model_config = ConfigDict(
         frozen=True,
