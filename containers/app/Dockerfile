@@ -10,6 +10,9 @@ COPY frontend ./
 RUN npm run build
 
 FROM python:3.12-slim AS base
+
+# Set DNS servers to improve network connectivity
+RUN echo "nameserver 8.8.8.8\nnameserver 8.8.4.4" > /etc/resolv.conf
 FROM base AS backend-builder
 
 WORKDIR /app
@@ -20,11 +23,22 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
     POETRY_CACHE_DIR=/tmp/poetry_cache
 
-RUN python3 -m pip install poetry --break-system-packages
+# Install poetry with retries to handle network issues
+RUN for i in $(seq 1 3); do \
+        python3 -m pip install poetry --break-system-packages && break || \
+        echo "Retry $i: pip install failed, retrying in 5 seconds..." && \
+        sleep 5; \
+    done
 
 COPY pyproject.toml poetry.lock ./
 RUN touch README.md
-RUN export POETRY_CACHE_DIR && poetry install --no-root && rm -rf $POETRY_CACHE_DIR
+# Install dependencies with retries to handle network issues
+RUN export POETRY_CACHE_DIR && \
+    for i in $(seq 1 3); do \
+        poetry install --no-root && rm -rf $POETRY_CACHE_DIR && break || \
+        echo "Retry $i: poetry install failed, retrying in 5 seconds..." && \
+        sleep 5; \
+    done
 
 FROM base AS openhands-app
 
