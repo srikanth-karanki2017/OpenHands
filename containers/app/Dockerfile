@@ -33,7 +33,7 @@ RUN for i in $(seq 1 3); do \
 COPY pyproject.toml poetry.lock ./
 RUN touch README.md
 # Install dependencies with retries to handle network issues
-RUN export POETRY_CACHE_DIR && \
+RUN export POETRY_CACHE_DIR && poetry add pydantic[email] && \
     for i in $(seq 1 3); do \
         poetry install --no-root && rm -rf $POETRY_CACHE_DIR && break || \
         echo "Retry $i: poetry install failed, retrying in 5 seconds..." && \
