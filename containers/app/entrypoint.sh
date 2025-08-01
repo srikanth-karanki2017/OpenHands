@@ -18,7 +18,7 @@ if [[ $ENABLE_MULTI_USER == "true" ]]; then
   ADMIN_PASSWORD=${ADMIN_PASSWORD:-openhands}
   
   # Run migration script
-  python /app/scripts/migrate_to_multi_user.py \
+  python /app/migrate_to_multi_user.py \
     --admin-username "$ADMIN_USERNAME" \
     --admin-email "$ADMIN_EMAIL" \
     --admin-password "$ADMIN_PASSWORD"

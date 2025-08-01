@@ -25,7 +25,7 @@ ENV POETRY_NO_INTERACTION=1 \
 
 # Install poetry with retries to handle network issues
 RUN for i in $(seq 1 3); do \
-        python3 -m pip install poetry --break-system-packages && break || \
+        python3 -m pip install poetry pydantic[email] --break-system-packages && break || \
         echo "Retry $i: pip install failed, retrying in 5 seconds..." && \
         sleep 5; \
     done
@@ -98,6 +98,7 @@ RUN find /app \! -group app -exec chgrp app {} +
 
 COPY --chown=openhands:app --chmod=770 --from=frontend-builder /app/build ./frontend/build
 COPY --chown=openhands:app --chmod=770 ./containers/app/entrypoint.sh /app/entrypoint.sh
+COPY --chown=openhands:app --chmod=770 ./scripts/migrate_to_multi_user.py /app/migrate_to_multi_user.py
 
 USER root
 
