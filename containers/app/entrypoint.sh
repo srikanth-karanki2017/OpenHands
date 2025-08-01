@@ -8,6 +8,26 @@ if [[ $NO_SETUP == "true" ]]; then
   exit 0
 fi
 
+# Run migration to multi-user mode if needed
+if [[ $ENABLE_MULTI_USER == "true" ]]; then
+  echo "Multi-user mode enabled, running migration if needed..."
+  
+  # Set default admin credentials if not provided
+  ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+  ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+  ADMIN_PASSWORD=${ADMIN_PASSWORD:-openhands}
+  
+  # Run migration script
+  python /app/scripts/migrate_to_multi_user.py \
+    --admin-username "$ADMIN_USERNAME" \
+    --admin-email "$ADMIN_EMAIL" \
+    --admin-password "$ADMIN_PASSWORD"
+  
+  echo "Migration completed. You can now login with:"
+  echo "  Username: $ADMIN_USERNAME"
+  echo "  Password: $ADMIN_PASSWORD"
+fi
+
 if [ "$(id -u)" -ne 0 ]; then
   echo "The OpenHands entrypoint.sh must run as root"
   exit 1
