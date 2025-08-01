@@ -9,7 +9,7 @@ RUN npm ci
 COPY frontend ./
 RUN npm run build
 
-FROM python:3.12.10-slim AS base
+FROM python:3.12-slim AS base
 FROM base AS backend-builder
 
 WORKDIR /app
@@ -20,9 +20,7 @@ ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=1 \
     POETRY_CACHE_DIR=/tmp/poetry_cache
 
-RUN apt-get update -y \
-    && apt-get install -y curl make git build-essential \
-    && python3 -m pip install poetry --break-system-packages
+RUN python3 -m pip install poetry --break-system-packages
 
 COPY pyproject.toml poetry.lock ./
 RUN touch README.md
