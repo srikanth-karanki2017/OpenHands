@@ -122,6 +122,7 @@ def _run_in_loop(coro: Coroutine, loop: asyncio.AbstractEventLoop, timeout: floa
     result = future.result(timeout=timeout)
     return result
 
+
 def run_async(coro):
     """
     Run an async coroutine in a synchronous context.

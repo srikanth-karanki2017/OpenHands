@@ -49,13 +49,13 @@ export function WebhookLogs() {
   const [selectedWebhookId, setSelectedWebhookId] = useState<string | null>(null);
   const [selectedLog, setSelectedLog] = useState<WebhookLog | null>(null);
   const { data: webhooks } = useWebhooks();
-  
-  const { 
-    data: logs, 
-    isLoading, 
-    refetch 
-  } = useWebhookLogs({ 
-    webhookId: selectedWebhookId || undefined 
+
+  const {
+    data: logs,
+    isLoading,
+    refetch
+  } = useWebhookLogs({
+    webhookId: selectedWebhookId || undefined
   });
 
   const handleViewLog = (log: WebhookLog) => {

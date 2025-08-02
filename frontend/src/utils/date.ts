@@ -10,15 +10,15 @@ export function formatDate(date: Date, formatType: "short" | "medium" | "long" =
     month: "short",
     day: "numeric",
   };
-  
+
   if (formatType === "medium" || formatType === "long") {
     options.hour = "2-digit";
     options.minute = "2-digit";
   }
-  
+
   if (formatType === "long") {
     options.second = "2-digit";
   }
-  
+
   return new Intl.DateTimeFormat("en-US", options).format(date);
 }

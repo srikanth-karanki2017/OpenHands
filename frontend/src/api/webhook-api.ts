@@ -52,15 +52,15 @@ export const webhookApi = {
    */
   getWebhookLogs: async (params?: { webhookId?: string; limit?: number }): Promise<WebhookLog[]> => {
     const queryParams = new URLSearchParams();
-    
+
     if (params?.webhookId) {
       queryParams.append("webhook_id", params.webhookId);
     }
-    
+
     if (params?.limit) {
       queryParams.append("limit", params.limit.toString());
     }
-    
+
     const url = `/api/webhooks/logs${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
     const response = await apiClient.get<WebhookLog[]>(url);
     return response.data;

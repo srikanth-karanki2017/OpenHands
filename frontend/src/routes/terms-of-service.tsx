@@ -19,7 +19,7 @@ export default function TermsOfService() {
 
   const handleAccept = async () => {
     if (!accepted) return;
-    
+
     try {
       await acceptTos.mutateAsync();
       navigate("/");
@@ -40,37 +40,37 @@ export default function TermsOfService() {
           <div className="prose max-w-none">
             <h2>{t(I18nKey.TOS$INTRODUCTION)}</h2>
             <p>{t(I18nKey.TOS$INTRODUCTION_TEXT)}</p>
-            
+
             <h2>{t(I18nKey.TOS$ACCEPTANCE)}</h2>
             <p>{t(I18nKey.TOS$ACCEPTANCE_TEXT)}</p>
-            
+
             <h2>{t(I18nKey.TOS$PRIVACY)}</h2>
             <p>{t(I18nKey.TOS$PRIVACY_TEXT)}</p>
-            
+
             <h2>{t(I18nKey.TOS$USAGE)}</h2>
             <p>{t(I18nKey.TOS$USAGE_TEXT)}</p>
-            
+
             <h2>{t(I18nKey.TOS$LIMITATIONS)}</h2>
             <p>{t(I18nKey.TOS$LIMITATIONS_TEXT)}</p>
           </div>
-          
+
           <div className="flex items-start space-x-2 pt-4">
-            <Checkbox 
-              id="terms" 
+            <Checkbox
+              id="terms"
               checked={accepted}
               onCheckedChange={(checked) => setAccepted(checked === true)}
             />
-            <Label 
-              htmlFor="terms" 
+            <Label
+              htmlFor="terms"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               {t(I18nKey.TOS$ACCEPT_TERMS)}
             </Label>
           </div>
-          
+
           <div className="flex justify-end pt-4">
-            <Button 
-              onClick={handleAccept} 
+            <Button
+              onClick={handleAccept}
               disabled={!accepted || acceptTos.isPending}
             >
               {acceptTos.isPending ? (

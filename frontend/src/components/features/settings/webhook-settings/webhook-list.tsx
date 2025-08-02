@@ -44,7 +44,7 @@ export function WebhookList() {
   const { t } = useTranslation();
   const { data: webhooks, isLoading } = useWebhooks();
   const deleteWebhook = useDeleteWebhook();
-  
+
   const [showForm, setShowForm] = useState(false);
   const [editingWebhook, setEditingWebhook] = useState<WebhookConfig | null>(null);
   const [webhookToDelete, setWebhookToDelete] = useState<WebhookConfig | null>(null);
