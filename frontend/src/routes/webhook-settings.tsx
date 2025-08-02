@@ -16,7 +16,7 @@ export default function WebhookSettings() {
   const [activeTab, setActiveTab] = useState("webhooks");
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container max-w-6xl mx-auto py-6 space-y-6">
       <PageHeader
         title={t(I18nKey.WEBHOOK$WEBHOOK_MANAGEMENT)}
         description={t(I18nKey.WEBHOOK$MANAGE_YOUR_WEBHOOKS)}
@@ -26,7 +26,7 @@ export default function WebhookSettings() {
         defaultValue="webhooks"
         value={activeTab}
         onValueChange={setActiveTab}
-        className="space-y-4"
+        className="space-y-4 w-full"
       >
         <TabsList>
           <TabsTrigger value="webhooks">

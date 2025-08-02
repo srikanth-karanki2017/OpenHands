@@ -77,16 +77,16 @@ export function WebhookList() {
 
   return (
     <>
-      <Card>
+      <Card className="w-full">
         <CardHeader>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <CardTitle>{t(I18nKey.WEBHOOK$MY_WEBHOOKS)}</CardTitle>
               <CardDescription>
                 {t(I18nKey.WEBHOOK$MANAGE_YOUR_WEBHOOK_CONFIGURATIONS)}
               </CardDescription>
             </div>
-            <Button onClick={handleAddWebhook}>
+            <Button onClick={handleAddWebhook} className="whitespace-nowrap">
               <PlusIcon className="h-4 w-4 mr-2" />
               {t(I18nKey.WEBHOOK$ADD_WEBHOOK)}
             </Button>
@@ -98,16 +98,17 @@ export function WebhookList() {
               {t(I18nKey.COMMON$LOADING)}...
             </div>
           ) : webhooks && webhooks.length > 0 ? (
+            <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t(I18nKey.WEBHOOK$NAME)}</TableHead>
-                  <TableHead>{t(I18nKey.WEBHOOK$URL)}</TableHead>
-                  <TableHead>{t(I18nKey.WEBHOOK$REPOSITORY)}</TableHead>
-                  <TableHead>{t(I18nKey.WEBHOOK$EVENTS)}</TableHead>
-                  <TableHead>{t(I18nKey.WEBHOOK$STATUS)}</TableHead>
-                  <TableHead>{t(I18nKey.WEBHOOK$CREATED_AT)}</TableHead>
-                  <TableHead>{t(I18nKey.COMMON$ACTIONS)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$NAME)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$URL)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$REPOSITORY)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$EVENTS)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$STATUS)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.WEBHOOK$CREATED_AT)}</TableHead>
+                  <TableHead className="whitespace-nowrap">{t(I18nKey.COMMON$ACTIONS)}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -163,6 +164,7 @@ export function WebhookList() {
                 ))}
               </TableBody>
             </Table>
+            </div>
           ) : (
             <div className="py-8 text-center text-muted-foreground">
               {t(I18nKey.WEBHOOK$NO_WEBHOOKS_FOUND)}
