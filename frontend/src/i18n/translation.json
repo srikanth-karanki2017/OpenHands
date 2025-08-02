@@ -1925,6 +1925,22 @@
         "de": "Geheimnisse",
         "uk": "Секрети"
     },
+    "SETTINGS$NAV_WEBHOOKS": {
+        "en": "Webhooks",
+        "ja": "ウェブフック",
+        "zh-CN": "网络钩子",
+        "zh-TW": "網路鉤子",
+        "ko-KR": "웹훅",
+        "no": "Webhooks",
+        "it": "Webhooks",
+        "pt": "Webhooks",
+        "es": "Webhooks",
+        "ar": "ويب هوكس",
+        "fr": "Webhooks",
+        "tr": "Web Kancaları",
+        "de": "Webhooks",
+        "uk": "Вебхуки"
+    },
     "SETTINGS$NAV_API_KEYS": {
         "en": "API Keys",
         "ja": "APIキー",
