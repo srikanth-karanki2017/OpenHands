@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { authApi, TokenResponse, UserResponse } from "#/api/auth-api";
 import { apiClient } from "#/api/api-client";
+import { openHands } from "#/api/open-hands-axios";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -36,6 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (expiresAt > new Date()) {
             // Set auth header for API requests
             apiClient.defaults.headers.common["Authorization"] = `${token.token_type} ${token.access_token}`;
+            openHands.defaults.headers.common["Authorization"] = `${token.token_type} ${token.access_token}`;
 
             // Fetch current user
             const userData = await authApi.getCurrentUser();
@@ -63,6 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Set auth header for API requests
     apiClient.defaults.headers.common["Authorization"] = `${token.token_type} ${token.access_token}`;
+    openHands.defaults.headers.common["Authorization"] = `${token.token_type} ${token.access_token}`;
 
     // Update auth state
     setIsAuthenticated(true);
@@ -83,6 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Remove auth header
     delete apiClient.defaults.headers.common["Authorization"];
+    delete openHands.defaults.headers.common["Authorization"];
 
     // Update auth state
     setIsAuthenticated(false);
