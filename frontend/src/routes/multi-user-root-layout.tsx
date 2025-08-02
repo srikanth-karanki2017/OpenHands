@@ -86,6 +86,9 @@ function MultiUserApp() {
 
   // Public routes that don't require authentication
   const isPublicRoute = pathname === "/login" || pathname === "/register" || isOnTosPage;
+  
+  // Check if the current route is a conversation-related route
+  const isConversationRoute = pathname.startsWith("/conversations/") || pathname === "/conversation-history";
 
   React.useEffect(() => {
     // Don't change language when on TOS page
@@ -101,6 +104,13 @@ function MultiUserApp() {
       navigate("/");
     }
   }, [error?.status, pathname, isOnTosPage, isPublicRoute]);
+
+  // Redirect unauthenticated users trying to access conversation routes to login
+  React.useEffect(() => {
+    if (isConversationRoute && !isAuthenticated && !isLoading) {
+      navigate("/login", { state: { from: pathname } });
+    }
+  }, [isConversationRoute, isAuthenticated, isLoading, pathname]);
 
   // Show loading state while checking authentication
   if (isLoading && !isPublicRoute) {

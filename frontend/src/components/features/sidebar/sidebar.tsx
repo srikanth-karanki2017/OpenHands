@@ -41,6 +41,9 @@ export function Sidebar() {
   const shouldHideMicroagentManagement =
     config?.FEATURE_FLAGS.HIDE_MICROAGENT_MANAGEMENT;
 
+  // Get authentication state
+  const { isAuthenticated, user: authUser } = useAuth();
+
   React.useEffect(() => {
     if (shouldHideLlmSettings) return;
 
@@ -56,7 +59,13 @@ export function Sidebar() {
       displayErrorToast(
         "Something went wrong while fetching settings. Please reload the page.",
       );
-    } else if (config?.APP_MODE === "oss" && settingsError?.status === 404) {
+    } else if (
+      config?.APP_MODE === "oss" &&
+      settingsError?.status === 404 &&
+      // Don't show LLM configuration popup in multi-user mode
+      // In multi-user mode, users should configure LLM settings after login
+      !isAuthenticated
+    ) {
       setSettingsModalIsOpen(true);
     }
   }, [
@@ -64,10 +73,9 @@ export function Sidebar() {
     settingsError,
     isFetchingSettings,
     location.pathname,
+    isAuthenticated,
+    config?.APP_MODE,
   ]);
-
-  // Get authentication state
-  const { isAuthenticated, user: authUser } = useAuth();
 
   return (
     <>
