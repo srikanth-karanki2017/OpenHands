@@ -139,6 +139,13 @@ export default function Profile() {
             >
               {t(I18nKey.SETTINGS$NAV_SECRETS)}
             </Button>
+            <Button
+              variant="outline"
+              className="w-full justify-start"
+              onClick={() => navigate("/settings/webhooks")}
+            >
+              {t(I18nKey.SETTINGS$NAV_WEBHOOKS)}
+            </Button>
           </CardContent>
         </Card>
       </div>
