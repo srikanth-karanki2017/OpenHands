@@ -102,6 +102,14 @@ export const router = createBrowserRouter([
             element: <LlmSettings />,
           },
           {
+            path: "llm",
+            element: <LlmSettings />,
+          },
+          {
+            path: "git",
+            element: <GitSettings />,
+          },
+          {
             path: "mcp",
             element: <McpSettings />,
           },
@@ -132,10 +140,6 @@ export const router = createBrowserRouter([
           {
             path: "api-keys",
             element: <ApiKeys />,
-          },
-          {
-            path: "webhooks",
-            element: <WebhookSettings />,
           },
         ],
       },
