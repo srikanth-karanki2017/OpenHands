@@ -130,14 +130,14 @@ export default function Profile() {
               className="w-full justify-start"
               onClick={() => navigate("/settings/app")}
             >
-              {t(I18nKey.SETTINGS$APP_SETTINGS)}
+              {t(I18nKey.SETTINGS$NAV_APPLICATION)}
             </Button>
             <Button
               variant="outline"
               className="w-full justify-start"
-              onClick={() => navigate("/settings/webhooks")}
+              onClick={() => navigate("/settings/secrets")}
             >
-              {t(I18nKey.WEBHOOK$WEBHOOK_MANAGEMENT)}
+              {t(I18nKey.SETTINGS$NAV_SECRETS)}
             </Button>
           </CardContent>
         </Card>
