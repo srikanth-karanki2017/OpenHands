@@ -15,6 +15,7 @@ from openhands.utils.async_utils import call_sync_from_async
 class FileSettingsStore(SettingsStore):
     file_store: FileStore
     path: str = 'settings.json'
+    user_id: str | None = None
 
     async def load(self) -> Settings | None:
         try:
@@ -39,4 +40,11 @@ class FileSettingsStore(SettingsStore):
             config.file_store_web_hook_url,
             config.file_store_web_hook_headers,
         )
-        return FileSettingsStore(file_store)
+        
+        # Create user-specific path for settings
+        if user_id:
+            path = f'users/{user_id}/settings.json'
+        else:
+            path = 'settings.json'
+            
+        return FileSettingsStore(file_store, path, user_id)
