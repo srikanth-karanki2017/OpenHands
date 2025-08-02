@@ -9,7 +9,7 @@ from pydantic import SecretStr, TypeAdapter
 
 from openhands.core.config.openhands_config import OpenHandsConfig
 from openhands.core.logger import openhands_logger as logger
-from openhands.server.user_auth.multi_user_auth import get_password_hash
+from openhands.server.user_auth.multi_user_auth import get_password_hash, verify_password
 from openhands.storage import get_file_store
 from openhands.storage.data_models.user import User
 from openhands.storage.files import FileStore
@@ -238,7 +238,7 @@ class FileUserStore(UserStore):
             # Check if password_hash exists and matches
             if (
                 user.password_hash
-                and user.password_hash.get_secret_value() == get_password_hash(password)
+                and verify_password(password, user.password_hash.get_secret_value())
             ):
                 # Update last_login
                 user.last_login = datetime.now(timezone.utc)

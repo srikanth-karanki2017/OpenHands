@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from pydantic import BaseModel, EmailStr, Field, SecretStr
+from pydantic import BaseModel, Field, SecretStr, field_validator, field_serializer
+import re
 
 
 class User(BaseModel):
@@ -15,7 +16,7 @@ class User(BaseModel):
 
     user_id: str = Field(..., description='Unique identifier for the user')
     username: str = Field(..., description='Username for display and login')
-    email: EmailStr | None = Field(None, description="User's email address")
+    email: str | None = Field(None, description="User's email address")
     password_hash: SecretStr | None = Field(
         None, description='Hashed password for basic auth'
     )
@@ -29,6 +30,13 @@ class User(BaseModel):
         False, description="Whether the user's email has been verified"
     )
 
+    @field_serializer('password_hash')
+    def serialize_password_hash(self, value: SecretStr | None) -> str | None:
+        """Serialize password hash to include the actual value."""
+        if value is None:
+            return None
+        return value.get_secret_value()
+
 
 class UserCreate(BaseModel):
     """
@@ -36,8 +44,17 @@ class UserCreate(BaseModel):
     """
 
     username: str = Field(..., min_length=3, max_length=50)
-    email: EmailStr
+    email: str
     password: SecretStr = Field(..., min_length=8)
+    
+    @field_validator('email')
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        """Validate email format."""
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_pattern, v):
+            raise ValueError('Invalid email format')
+        return v
 
 
 class UserLogin(BaseModel):
@@ -56,7 +73,7 @@ class UserResponse(BaseModel):
 
     user_id: str
     username: str
-    email: EmailStr | None = None
+    email: str | None = None
     created_at: datetime
     last_login: datetime | None = None
     email_verified: bool = False

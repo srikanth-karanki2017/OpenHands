@@ -18,7 +18,7 @@ from openhands.storage.webhook import (
     create_webhook_config,
 )
 
-app = APIRouter(prefix='/api/webhooks', dependencies=get_dependencies())
+app = APIRouter(prefix='/api/webhooks')
 
 
 @app.post(

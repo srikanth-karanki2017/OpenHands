@@ -21,7 +21,7 @@ from openhands.storage.data_models.user import (
 )
 from openhands.storage.user import FileUserStore, create_user
 
-app = APIRouter(prefix='/api/auth', dependencies=get_dependencies())
+app = APIRouter(prefix='/api/auth')
 
 
 @app.post('/register', response_model=UserResponse, status_code=status.HTTP_201_CREATED)
