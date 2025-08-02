@@ -121,3 +121,23 @@ def _run_in_loop(coro: Coroutine, loop: asyncio.AbstractEventLoop, timeout: floa
     future = asyncio.run_coroutine_threadsafe(coro, loop)
     result = future.result(timeout=timeout)
     return result
+
+def run_async(coro):
+    """
+    Run an async coroutine in a synchronous context.
+
+    Example:
+        run_async(main())
+    """
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        # No event loop, create one
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    if loop.is_running():
+        # Likely running in Jupyter or another async context
+        return asyncio.ensure_future(coro)
+    else:
+        return loop.run_until_complete(coro)
