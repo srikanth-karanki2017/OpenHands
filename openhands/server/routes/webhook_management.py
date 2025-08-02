@@ -3,7 +3,6 @@ from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, HTTPException, Path, Query, status
 
 from openhands.core.logger import openhands_logger as logger
-from openhands.server.dependencies import get_dependencies
 from openhands.server.shared import config
 from openhands.server.user_auth.multi_user_auth import get_current_user
 from openhands.storage.data_models.user import User

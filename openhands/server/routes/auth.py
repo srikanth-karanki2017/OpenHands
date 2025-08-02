@@ -5,7 +5,6 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from openhands.core.logger import openhands_logger as logger
-from openhands.server.dependencies import get_dependencies
 from openhands.server.shared import config
 from openhands.server.user_auth.multi_user_auth import (
     JWT_EXPIRATION_MINUTES,

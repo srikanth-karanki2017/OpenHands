@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 
-from pydantic import BaseModel, Field, SecretStr, field_validator, field_serializer
-import re
+from pydantic import BaseModel, Field, SecretStr, field_serializer, field_validator
 
 
 class User(BaseModel):
@@ -46,7 +46,7 @@ class UserCreate(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     email: str
     password: SecretStr = Field(..., min_length=8)
-    
+
     @field_validator('email')
     @classmethod
     def validate_email(cls, v: str) -> str:

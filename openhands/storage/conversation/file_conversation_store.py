@@ -28,6 +28,7 @@ conversation_metadata_type_adapter = TypeAdapter(ConversationMetadata)
 @dataclass
 class FileConversationStore(ConversationStore):
     file_store: FileStore
+    user_id: str | None = None
 
     async def save_metadata(self, metadata: ConversationMetadata) -> None:
         json_str = conversation_metadata_type_adapter.dump_json(metadata)
@@ -96,10 +97,12 @@ class FileConversationStore(ConversationStore):
         return ConversationMetadataResultSet(conversations, next_page_id)
 
     def get_conversation_metadata_dir(self) -> str:
+        if self.user_id:
+            return f'users/{self.user_id}/conversations'
         return CONVERSATION_BASE_DIR
 
     def get_conversation_metadata_filename(self, conversation_id: str) -> str:
-        return get_conversation_metadata_filename(conversation_id)
+        return get_conversation_metadata_filename(conversation_id, self.user_id)
 
     @classmethod
     async def get_instance(
@@ -111,7 +114,7 @@ class FileConversationStore(ConversationStore):
             config.file_store_web_hook_url,
             config.file_store_web_hook_headers,
         )
-        return FileConversationStore(file_store)
+        return FileConversationStore(file_store, user_id)
 
 
 def _sort_key(conversation: ConversationMetadata) -> str:
