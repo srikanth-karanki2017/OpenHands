@@ -7,7 +7,7 @@ import { WebhookUpdateRequest } from "#/types/webhook";
  */
 export function useUpdateWebhook() {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: (webhook: WebhookUpdateRequest) => webhookApi.updateWebhook(webhook),
     onSuccess: (data) => {

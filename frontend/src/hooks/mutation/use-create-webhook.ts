@@ -7,7 +7,7 @@ import { WebhookCreateRequest } from "#/types/webhook";
  */
 export function useCreateWebhook() {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: (webhook: WebhookCreateRequest) => webhookApi.createWebhook(webhook),
     onSuccess: () => {

@@ -37,7 +37,7 @@ export const authApi = {
     const formData = new FormData();
     formData.append("username", credentials.username);
     formData.append("password", credentials.password);
-    
+
     const response = await apiClient.post<TokenResponse>("/api/auth/token", credentials);
     return response.data;
   },

@@ -1,6 +1,5 @@
 import hmac
 import json
-import uuid
 from typing import Any, Optional
 
 from fastapi import APIRouter, Header, HTTPException, Query, Request, status
@@ -10,7 +9,10 @@ from openhands.core.logger import openhands_logger as logger
 from openhands.integrations.github.webhook_service import GitHubWebhookService
 from openhands.server.dependencies import get_dependencies
 from openhands.server.shared import config, server_config
-from openhands.storage.data_models.webhook_config import WebhookEventType, WebhookLogStatus
+from openhands.storage.data_models.webhook_config import (
+    WebhookEventType,
+    WebhookLogStatus,
+)
 from openhands.storage.webhook import FileWebhookStore, create_webhook_log
 
 app = APIRouter(prefix='/api/webhooks', dependencies=get_dependencies())
@@ -48,13 +50,13 @@ async def github_webhook(
     """
     # Get the raw request body
     body = await request.body()
-    
+
     # Parse the payload first to extract repository info for logging
     try:
         payload_dict = json.loads(body)
         repo_full_name = str(payload_dict.get('repository', {}).get('full_name', ''))
         pr_number = None
-        
+
         if x_github_event == 'pull_request' and 'pull_request' in payload_dict:
             pr_number = int(payload_dict['pull_request'].get('number', 0))
     except Exception:
@@ -64,31 +66,33 @@ async def github_webhook(
     # Create webhook log entry if user_id and webhook_id are provided
     webhook_log = None
     webhook_store = None
-    
+
     if user_id and webhook_id:
         try:
             webhook_store = await FileWebhookStore.get_instance(config, user_id)
-            
+
             # Create log entry
             webhook_log = create_webhook_log(
                 webhook_id=webhook_id,
                 user_id=user_id,
-                event_type=WebhookEventType.PULL_REQUEST if x_github_event == 'pull_request' else WebhookEventType.ALL,
+                event_type=WebhookEventType.PULL_REQUEST
+                if x_github_event == 'pull_request'
+                else WebhookEventType.ALL,
                 repository=repo_full_name,
                 pr_number=pr_number,
                 status=WebhookLogStatus.PENDING,
                 request_payload=payload_dict,
             )
-            
+
             # Save log entry
             await webhook_store.save_webhook_log(webhook_log)
         except Exception as e:
-            logger.error(f"Error creating webhook log: {str(e)}")
+            logger.error(f'Error creating webhook log: {str(e)}')
             # Continue processing even if log creation fails
 
     # Verify webhook signature if configured
     webhook_secret = None
-    
+
     # First try user-specific webhook secret if user_id and webhook_id are provided
     if user_id and webhook_id and webhook_store:
         try:
@@ -96,12 +100,12 @@ async def github_webhook(
             if webhook_config and webhook_config.secret:
                 webhook_secret = webhook_config.secret.get_secret_value()
         except Exception as e:
-            logger.error(f"Error retrieving webhook config: {str(e)}")
-    
+            logger.error(f'Error retrieving webhook config: {str(e)}')
+
     # Fall back to global webhook secret if no user-specific secret
     if not webhook_secret:
         webhook_secret = server_config.github_webhook_secret
-    
+
     # Verify signature if secret and signature are provided
     if webhook_secret and x_hub_signature_256:
         signature = hmac.new(
@@ -113,13 +117,13 @@ async def github_webhook(
             logger.warning(
                 'Invalid GitHub webhook signature', extra={'event': x_github_event}
             )
-            
+
             # Update log entry if it exists
             if webhook_log and webhook_store:
                 webhook_log.status = WebhookLogStatus.FAILURE
-                webhook_log.error_message = "Invalid webhook signature"
+                webhook_log.error_message = 'Invalid webhook signature'
                 await webhook_store.save_webhook_log(webhook_log)
-            
+
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid signature'
             )
@@ -187,7 +191,7 @@ async def github_webhook(
                 # Add event info to the result
                 result['event'] = x_github_event
                 result['action'] = payload.action
-                
+
                 # Update log entry if it exists
                 if webhook_log and webhook_store:
                     webhook_log.status = WebhookLogStatus.SUCCESS
@@ -200,7 +204,7 @@ async def github_webhook(
         if webhook_log and webhook_store:
             webhook_log.status = WebhookLogStatus.SUCCESS
             webhook_log.response_status = 200
-            webhook_log.error_message = f"Event {x_github_event} with action {payload_dict.get('action')} not processed"
+            webhook_log.error_message = f'Event {x_github_event} with action {payload_dict.get("action")} not processed'
             await webhook_store.save_webhook_log(webhook_log)
 
         return {
@@ -215,13 +219,13 @@ async def github_webhook(
             extra={'event': x_github_event},
             exc_info=True,
         )
-        
+
         # Update log entry if it exists
         if webhook_log and webhook_store:
             webhook_log.status = WebhookLogStatus.FAILURE
             webhook_log.error_message = str(e)
             await webhook_store.save_webhook_log(webhook_log)
-        
+
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f'Error processing webhook: {str(e)}',

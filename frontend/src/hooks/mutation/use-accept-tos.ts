@@ -6,7 +6,7 @@ import { authApi } from "#/api/auth-api";
  */
 export function useAcceptTos() {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: () => authApi.acceptTermsOfService(),
     onSuccess: () => {

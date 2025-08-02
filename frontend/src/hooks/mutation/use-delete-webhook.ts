@@ -6,7 +6,7 @@ import { webhookApi } from "#/api/webhook-api";
  */
 export function useDeleteWebhook() {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: (webhookId: string) => webhookApi.deleteWebhook(webhookId),
     onSuccess: () => {

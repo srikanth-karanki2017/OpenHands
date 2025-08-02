@@ -9,7 +9,7 @@ import { I18nKey } from "#/i18n/declaration";
  */
 export function useSendVerificationEmail() {
   const { t } = useTranslation();
-  
+
   return useMutation({
     mutationFn: () => authApi.sendVerificationEmail(),
     onSuccess: () => {

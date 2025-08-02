@@ -4,4 +4,4 @@ from openhands.storage.user.user_store import (
     create_user,
 )
 
-__all__ = ["UserStore", "FileUserStore", "create_user"]
+__all__ = ['UserStore', 'FileUserStore', 'create_user']

@@ -70,7 +70,7 @@ export default function Login() {
       navigate("/");
     } catch (err: any) {
       setError(
-        err.response?.data?.detail || 
+        err.response?.data?.detail ||
         t(I18nKey.AUTH$LOGIN_FAILED)
       );
     }

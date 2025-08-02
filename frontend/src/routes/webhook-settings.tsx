@@ -8,7 +8,7 @@ import { WebhookLogs } from "#/components/features/settings/webhook-settings/web
 
 /**
  * Webhook Settings page component.
- * 
+ *
  * This page allows users to manage their webhook configurations and view webhook logs.
  */
 export default function WebhookSettings() {
